@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_28_070129) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_28_072540) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "stocks", force: :cascade do |t|
+    t.string "name", limit: 100, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_stocks_on_name", unique: true
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name", limit: 100, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_teams_on_name", unique: true
+  end
 
   create_table "transactions", force: :cascade do |t|
     t.bigint "source_wallet_id"
@@ -23,6 +37,14 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_28_070129) do
     t.datetime "updated_at", null: false
     t.index ["source_wallet_id"], name: "index_transactions_on_source_wallet_id"
     t.index ["target_wallet_id"], name: "index_transactions_on_target_wallet_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", limit: 100, null: false
+    t.string "email", limit: 100, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "wallets", force: :cascade do |t|
