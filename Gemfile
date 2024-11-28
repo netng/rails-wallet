@@ -47,3 +47,5 @@ group :development, :test do
 end
 
 
+
+gem "dotenv", "~> 3.1"
